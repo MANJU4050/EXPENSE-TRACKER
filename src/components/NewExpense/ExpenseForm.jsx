@@ -7,10 +7,9 @@ const ExpenseForm = (props) => {
     const [enteredTitle,setEnteredTitle] = useState('');
     const [enteredAmount,setEnteredAmount] = useState('');
     const [enteredDate,setEnteredDate] = useState('');
-    const [userInput,setUserInput] = useState({
-        enteredTitle:'',
-        enteredAmount:'',
-    });
+   
+
+    
 
     const titleHandler = (event) => {
         setEnteredTitle(event.target.value);
@@ -28,7 +27,7 @@ const ExpenseForm = (props) => {
         event.preventDefault();
         const expenseData={
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: +enteredAmount,
             date: new Date(enteredDate)
         };
 
@@ -37,6 +36,7 @@ const ExpenseForm = (props) => {
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
+        props.onCancel();
 
        
     }
@@ -44,7 +44,7 @@ const ExpenseForm = (props) => {
     return (
         <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
-
+    
                 <div className="new-expense__control">
                     <label >Title</label>
                     <input 
@@ -52,7 +52,7 @@ const ExpenseForm = (props) => {
                     onChange={titleHandler}
                     value={enteredTitle} />
                 </div>
-
+    
                 <div className="new-expense__control">
                     <label >Amount</label>
                     <input 
@@ -62,7 +62,7 @@ const ExpenseForm = (props) => {
                      onChange={amountHandler}
                      value={enteredAmount} />
                 </div>
-
+    
                 <div className="new-expense__control">
                     <label >Date</label>
                     <input 
@@ -72,13 +72,22 @@ const ExpenseForm = (props) => {
                     onChange={dateHandler}
                     value={enteredDate} />
                 </div>
-
+    
             </div>
             <div className="new-expense__actions">
-                <button type='submit'>Add Expense</button>
+                <button onClick={props.onCancel}>Cancel</button>
+                <button type='submit'>Add  Expense</button>
             </div>
+
         </form>
+        
+
     )
+        
+
+       
+       
+    
 }
 
 export default ExpenseForm;

@@ -3,6 +3,7 @@ import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter';
+import ExpensesChart from './ExpensesChart';
 
 
 
@@ -25,14 +26,13 @@ const Expenses = (props) => {
   return (
     <Card className="expenses">
       <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-
-      {filteredItems.map(item => 
+      <ExpensesChart expenses={filteredItems} />
+    {filteredItems.length === 0 ? <p>No Expenses found</p> : filteredItems.map(item => 
       <ExpenseItem
       key ={item.id}
       title={item.title} 
       date={item.date} 
-      price={item.amount} />)
-      }
+      price={item.amount} />)}
 
     </Card>
   )
